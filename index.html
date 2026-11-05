@@ -95,8 +95,8 @@ function splitHeads(){
 $$('.boi-h').forEach(function(h){
 if(h.__sp)return;h.__sp=1;var k=0;
 (function walk(n){[].slice.call(n.childNodes).forEach(function(c){
-if(c.nodeType===3){var f=D.createDocumentFragment();c.textContent.split(/([ \t\n\r]+)/).forEach(function(w){
-if(!w)return;if(/^[ \t\n\r]+$/.test(w)){f.appendChild(D.createTextNode(' '));return}
+if(c.nodeType===3){var f=D.createDocumentFragment();c.textContent.split(/([ \t\n\r\u00a0]+)/).forEach(function(w){
+if(!w)return;if(/^[ \t\n\r\u00a0]+$/.test(w)){f.appendChild(D.createTextNode(' '));return}
 var wd=el('span','wd');w.split('').forEach(function(ch){var s=el('span','ch');s.textContent=ch;s.style.transitionDelay=(k++*.035)+'s';wd.appendChild(s)});f.appendChild(wd)});
 n.replaceChild(f,c)}
 else if(c.nodeType===1)walk(c);
@@ -120,7 +120,7 @@ $$('.boi-carve path').forEach(function(p){var L=p.getTotalLength?p.getTotalLengt
 $$('[data-boi-words]').forEach(function(b){
 if(b.__boi)return;b.__boi=1;
 (function walk(n){[].slice.call(n.childNodes).forEach(function(c){
-if(c.nodeType===3){var f=D.createDocumentFragment();c.textContent.split(/([ \t\n\r]+)/).forEach(function(w){if(!w)return;if(/^[ \t\n\r]+$/.test(w))f.appendChild(D.createTextNode(w));else{var s=el('span','w');s.textContent=w;f.appendChild(s)}});n.replaceChild(f,c)}
+if(c.nodeType===3){var f=D.createDocumentFragment();c.textContent.split(/([ \t\n\r\u00a0]+)/).forEach(function(w){if(!w)return;if(/^[ \t\n\r\u00a0]+$/.test(w))f.appendChild(D.createTextNode(w));else{var s=el('span','w');s.textContent=w;f.appendChild(s)}});n.replaceChild(f,c)}
 else if(c.nodeType===1)walk(c);
 })})(b);
 });
@@ -773,7 +773,7 @@ html[data-boi-theme="dark"] .boi-ar{--ar-bg:#0E0E0E;--ar-bg2:#050505;--ar-ice:#1
     <div class="boi-proc__head">
       <div class="boi-kicker">1-й период · процесс</div>
       <div class="boi-title" data-n="03">
-        <h2 class="boi-h" data-boi-reveal>Как мы работаем</h2>
+        <h2 class="boi-h" data-boi-reveal>Как мы работаем</h2>
         <div class="boi-script">от вбрасывания до гола</div>
       </div>
     </div>
@@ -1184,13 +1184,21 @@ fit();addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)doc
 /* плавность прокрутки: зерно без анимации и без наложения, карточки без размытия фона */
 .boi-grain{animation:none!important;mix-blend-mode:normal!important;inset:0!important;opacity:.05!important;filter:none!important;transform:translateZ(0)}
 .boi-stp,.boi-part__c,.boi-tar__col,.boi-case,.boi-proc__trust div{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
-.boi-mani__stick,.boi-proc__stick{height:100vh;height:100lvh}
+.boi-mani__stick{height:100vh;height:100lvh}
+@media (min-width:901px){.boi-proc__stick{height:100vh;height:100lvh}}
 @media (pointer:coarse){
 .boi-board,.boi-ck,.boi-nav.is-solid{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 .boi-board{background:rgba(20,20,20,.92)!important}
 .boi-ck{background:#151515!important}
 .boi-nav.is-solid{background:var(--c-bg)!important}
 .boi-grain{display:none!important}
+}
+.boi-h .wd{white-space:nowrap}
+@media (max-width:370px){.boi .boi-h{font-size:30px!important}}
+@media (max-width:900px){
+.boi-proc__rink,.boi-proc__hint,.boi-proc__lane{display:none!important}
+.boi-proc__track{will-change:auto!important}
+.boi-stp{transition:none!important}
 }
 </style>
 </body>
