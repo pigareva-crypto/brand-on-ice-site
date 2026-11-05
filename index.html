@@ -24,6 +24,14 @@ html,body{margin:0;padding:0}
 body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 </style>
 <script>(function(){if(!document.fonts)return;Promise.all([document.fonts.load('16px "Stapel"'),document.fonts.load('16px "Lemon Tuesday"'),document.fonts.load('16px "BOI Helvetica"')]).then(function(){document.documentElement.classList.add('boi-fonts')})})();</script>
+<script>
+/* Telegram и другие встроенные браузеры меняют высоту экрана при прокрутке (панели прячутся).
+   На сенсорных устройствах пересчеты по resize запускаем только при реальной смене ширины (поворот экрана). */
+(function(){if(!(window.matchMedia&&matchMedia('(pointer:coarse)').matches))return;
+var add=window.addEventListener,lw=innerWidth,subs=[];
+add.call(window,'resize',function(){if(innerWidth===lw)return;lw=innerWidth;subs.forEach(function(f){try{f.call(window)}catch(e){}})});
+window.addEventListener=function(t,f,o){if(t==='resize'&&typeof f==='function'){subs.push(f);return}return add.call(window,t,f,o)};})();
+</script>
 </head>
 <body>
 <!-- BRAND ON ICE · БАЗА, часть 1 из 2: цвета, стили, анимации. Невидимый блок. -->
@@ -1176,6 +1184,14 @@ fit();addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)doc
 /* плавность прокрутки: зерно без анимации и без наложения, карточки без размытия фона */
 .boi-grain{animation:none!important;mix-blend-mode:normal!important;inset:0!important;opacity:.05!important;filter:none!important;transform:translateZ(0)}
 .boi-stp,.boi-part__c,.boi-tar__col,.boi-case,.boi-proc__trust div{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.boi-mani__stick,.boi-proc__stick{height:100vh;height:100lvh}
+@media (pointer:coarse){
+.boi-board,.boi-ck,.boi-nav.is-solid{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.boi-board{background:rgba(20,20,20,.92)!important}
+.boi-ck{background:#151515!important}
+.boi-nav.is-solid{background:var(--c-bg)!important}
+.boi-grain{display:none!important}
+}
 </style>
 </body>
 </html>
