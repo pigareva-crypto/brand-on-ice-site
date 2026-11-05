@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://brand-on-ice.ru/sitemap.xml
