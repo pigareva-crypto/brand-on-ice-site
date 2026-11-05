@@ -1172,5 +1172,10 @@ fit();addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)doc
 function fit(){w.style.setProperty('--ew','100px');var avail=w.clientWidth-parseFloat(getComputedStyle(w).paddingLeft)*2;var k=avail/t.scrollWidth;w.style.setProperty('--ew',(100*k*.99).toFixed(1)+'px')}
 fit();addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();
 </script>
+<style id="boi-perf">
+/* плавность прокрутки: зерно без анимации и без наложения, карточки без размытия фона */
+.boi-grain{animation:none!important;mix-blend-mode:normal!important;inset:0!important;opacity:.05!important;filter:none!important;transform:translateZ(0)}
+.boi-stp,.boi-part__c,.boi-tar__col,.boi-case,.boi-proc__trust div{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+</style>
 </body>
 </html>
